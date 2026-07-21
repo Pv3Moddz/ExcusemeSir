@@ -15,7 +15,7 @@ elseif Id == 109375530179766 then
     local LocalPlayer = game.Players.LocalPlayer
     local SkipUI = LocalPlayer.PlayerGui:FindFirstChild("Skip")
     local SkipButton = SkipUI:FindFirstChildOfClass("TextButton")
-
+    LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
     while true do
         -- Atualiza o personagem do jogador dinamicamente para evitar erros pós-respawn
         local PCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
