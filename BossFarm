@@ -1,0 +1,56 @@
+local queue_on_teleport = queue_on_teleport or syn.queue_on_teleport or queue_teleport
+if queue_on_teleport then
+    queue_on_teleport([[
+        repeat task.wait() until game:IsLoaded()
+        task.wait(10)
+        
+    ]])
+end
+local Id = game.PlaceId
+if Id == 136101424666302 then
+    task.wait(10)
+    game:GetService("TeleportService"):Teleport(109375530179766, game.Players.LocalPlayer)
+elseif Id == 109375530179766 then
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+    local GuiService = game:GetService("GuiService")
+    local LocalPlayer = game.Players.LocalPlayer
+    local SkipUI = LocalPlayer.PlayerGui:FindFirstChild("Skip")
+    local SkipButton = SkipUI:FindFirstChildOfClass("TextButton")
+
+    while true do
+        -- Atualiza o personagem do jogador dinamicamente para evitar erros pós-respawn
+        local PCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+        local PHRP = PCharacter:FindFirstChild("HumanoidRootPart")
+        if SkipUI.Enabled then
+            local InitX = SkipButton.AbsolutePosition.X + SkipButton.AbsoluteSize.X / 2
+            local InitY = SkipButton.AbsolutePosition.Y + SkipButton.AbsoluteSize.Y / 2 + GuiService:GetGuiInset().Y
+            VirtualInputManager:SendMouseButtonEvent(InitX, InitY, 0, true, game, 0)
+            task.wait()
+            VirtualInputManager:SendMouseButtonEvent(InitX, InitY, 0, false, game, 0)
+        end
+        if PHRP then
+            local Target = game.Workspace.Characters:FindFirstChildOfClass("Model")
+            if Target then
+                local HRP = Target:FindFirstChild("HumanoidRootPart")
+                local Humanoid = Target:FindFirstChildOfClass("Humanoid")
+
+                -- Garante que o alvo existe e está vivo
+                if HRP and Humanoid and Humanoid.Health > 0 then
+                    PHRP.CFrame = HRP.CFrame * CFrame.new(0, 0, 5) -- Posiciona 5 studs atrás do alvo
+
+                    -- Simula o clique do mouse
+                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                    task.wait(0.05)
+                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+                    task.wait(0.05)
+                else
+                    task.wait(0.5)
+                end
+            else
+                task.wait(2) -- Aguarda caso nenhum alvo esteja presente no Workspace
+            end
+        else
+            task.wait(1)
+        end
+    end
+end
