@@ -2,7 +2,6 @@ local queue_on_teleport = queue_on_teleport or syn.queue_on_teleport or queue_te
 if queue_on_teleport then
     queue_on_teleport([[
         repeat task.wait() until game:IsLoaded()
-        task.wait(10)
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Pv3Moddz/ExcusemeSir/refs/heads/main/BossFarm"))()
     ]])
 end
