@@ -21,7 +21,7 @@ elseif Id == 109375530179766 then
         -- Atualiza o personagem do jogador dinamicamente para evitar erros pós-respawn
         local PCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
         local PHRP = PCharacter:FindFirstChild("HumanoidRootPart")
-        for _, part in ipairs(PlayerChar:GetDescendants()) do
+        for _, part in ipairs(PCharacter:GetDescendants()) do
             if part:IsA("BasePart") then
                 part.CanCollide = false
             end
