@@ -11,13 +11,11 @@ if Id == 136101424666302 then
     task.wait(10)
     game:GetService("TeleportService"):Teleport(109375530179766, game.Players.LocalPlayer)
 elseif Id == 109375530179766 then
-    local VirtualInputManager = game:GetService("VirtualInputManager")
-    local GuiService = game:GetService("GuiService")
-    local LocalPlayer = game.Players.LocalPlayer
-    local SkipUI = LocalPlayer.PlayerGui:FindFirstChild("Skip")
-    local SkipButton = SkipUI:FindFirstChildOfClass("TextButton")
+        local LocalPlayer = game.Players.LocalPlayer
+    local Event = game:GetService("ReplicatedStorage"):FindFirstChild("Styles"):FindFirstChild("Butcher"):FindFirstChild("Tech")
     LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
     while game.PlaceId == 109375530179766 do
+        game:GetService("ReplicatedStorage"):FindFirstChild("SkipCutscene"):FireServer()
         -- Atualiza o personagem do jogador dinamicamente para evitar erros pós-respawn
         local PCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
         local PHRP = PCharacter:FindFirstChild("HumanoidRootPart")
@@ -25,13 +23,6 @@ elseif Id == 109375530179766 then
             if part:IsA("BasePart") then
                 part.CanCollide = false
             end
-        end
-        if SkipUI.Enabled then
-            local InitX = SkipButton.AbsolutePosition.X + SkipButton.AbsoluteSize.X / 2
-            local InitY = SkipButton.AbsolutePosition.Y + SkipButton.AbsoluteSize.Y / 2 + GuiService:GetGuiInset().Y
-            VirtualInputManager:SendMouseButtonEvent(InitX, InitY, 0, true, game, 0)
-            task.wait(1)
-            VirtualInputManager:SendMouseButtonEvent(InitX, InitY, 0, false, game, 0)
         end
         if PHRP then
             local Target = game.Workspace.Characters:FindFirstChildOfClass("Model")
@@ -42,12 +33,8 @@ elseif Id == 109375530179766 then
                 -- Garante que o alvo existe e está vivo
                 if HRP and Humanoid and Humanoid.Health > 0 then
                     PHRP.CFrame = HRP.CFrame * CFrame.new(0, 0, 5) -- Posiciona 5 studs atrás do alvo
-
-                    -- Simula o clique do mouse
-                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
-                    task.wait(0.1)
-                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
-                    task.wait(0.1)
+                    Event:FireServer("Special","Laser")
+                    task.wait()
                 else
                     task.wait(0.5)
                 end
