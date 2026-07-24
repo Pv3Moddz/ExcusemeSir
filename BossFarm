@@ -11,7 +11,7 @@ if Id == 136101424666302 then
     task.wait(10)
     game:GetService("TeleportService"):Teleport(109375530179766, game.Players.LocalPlayer)
 elseif Id == 109375530179766 then
-        local LocalPlayer = game.Players.LocalPlayer
+    local LocalPlayer = game.Players.LocalPlayer
     local Event = game:GetService("ReplicatedStorage"):FindFirstChild("Styles"):FindFirstChild("Butcher"):FindFirstChild("Tech")
     LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
     while game.PlaceId == 109375530179766 do
