@@ -31,8 +31,9 @@ elseif Id == 109375530179766 then
 
                 -- Garante que o alvo existe e está vivo
                 if HRP and Humanoid and Humanoid.Health > 0 then
-                    PHRP.CFrame = HRP.CFrame * CFrame.new(0, 0, 5) -- Posiciona 5 studs atrás do alvo
-                    Event:FireServer("Special","Laser")
+                    PHRP.CFrame = HRP.CFrame * CFrame.new(0, 0, 5) -- Posiciona 5 studs atrás do alvosd
+                    Event:FireServer("Light","Run")
+                    Event:FireServer("Light","Stomp")
                     task.wait()
                 else
                     task.wait(0.5)
