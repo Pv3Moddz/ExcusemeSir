@@ -8,6 +8,14 @@ if queue_on_teleport then
 end
 local Id = game.PlaceId
 if Id == 136101424666302 then
+    local TraderBuyRF = game:GetService("ReplicatedStorage"):FindFirstChild("TraderBuyRF")
+    local Ids = {"commonluck", "commoncoin", "rubycrate", "waterfruit", "weathercleanser", "tempv", "sonionfruit", "cauldronfountain", "tradetoken", "epicluck", "epiccoin", "legendaryv1", "mythiccoinfountain", "mythicluckfountain", "patriotcrate", "larpfruit"}
+    for i = 1, 10 do
+        for _, Id in ipairs(Ids) do
+            TraderBuyRF:InvokeServer(Id)
+        end
+        task.wait()
+    end
     game:GetService("TeleportService"):Teleport(109375530179766, game.Players.LocalPlayer)
 elseif Id == 109375530179766 then
     local LocalPlayer = game.Players.LocalPlayer
